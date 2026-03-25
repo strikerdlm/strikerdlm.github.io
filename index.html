@@ -31,13 +31,13 @@
             padding: 4rem 0;
             border-bottom: 1px solid var(--border);
         }
-        .profile-title {
+        h1 {
             color: var(--primary);
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
         }
         .subtitle {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--accent);
             font-weight: 300;
         }
@@ -46,50 +46,26 @@
             border-bottom: 1px solid var(--border);
         }
         h2 {
-            color: #f0f6fc;
-            font-size: 1.8rem;
+            color: var(--primary);
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
             margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-        }
-        h2::before {
-            content: "";
-            display: inline-block;
-            width: 4px;
-            height: 24px;
-            background: var(--primary);
-            margin-right: 1rem;
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
         .card {
             background: var(--card-bg);
+            border: 1px solid var(--border);
             padding: 1.5rem;
             border-radius: 8px;
-            border: 1px solid var(--border);
             transition: transform 0.2s;
         }
         .card:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
-        }
-        .card h3 {
-            margin-top: 0;
-            color: var(--accent);
-        }
-        .pub-item {
-            margin-bottom: 1.5rem;
-        }
-        .pub-title {
-            font-weight: bold;
-            color: #f0f6fc;
-        }
-        .pub-meta {
-            font-size: 0.9rem;
-            color: #8b949e;
         }
         .tag {
             display: inline-block;
@@ -99,12 +75,7 @@
             border-radius: 12px;
             font-size: 0.8rem;
             margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        footer {
-            text-align: center;
-            padding: 3rem;
-            color: #8b949e;
+            margin-top: 0.5rem;
         }
         a {
             color: var(--accent);
@@ -113,95 +84,110 @@
         a:hover {
             text-decoration: underline;
         }
-        .training-badge {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 1rem;
-            justify-content: center;
-        }
-        .badge {
-            border: 1px solid var(--accent);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
+        footer {
+            text-align: center;
+            padding: 2rem;
             font-size: 0.9rem;
+            color: #8b949e;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1 class="profile-title">Diego L. Malpica</h1>
-            <p class="subtitle">Aerospace Medicine Researcher | AI & Human Performance Systems</p>
-            <div class="training-badge">
-                <span class="badge">NASA Johnson Space Center Trained</span>
-                <span class="badge">European Astronaut Centre (ESA) Trained</span>
-                <span class="badge">Colombian Air Force (FAC) Docente</span>
+            <h1>Diego Leonel Malpica Hincapié</h1>
+            <p class="subtitle">Aerospace Medicine Specialist | Researcher | AI Developer</p>
+            <div style="margin-top: 1rem;">
+                <span class="tag">MD</span>
+                <span class="tag">Aviation Physiology</span>
+                <span class="tag">Human Factors</span>
+                <span class="tag">Data Science</span>
             </div>
         </header>
 
         <section id="about">
-            <h2>About Me</h2>
-            <p>I am a specialist in Aerospace Medicine from the Universidad Nacional de Colombia, currently serving as a researcher and professor at the Escuela de Posgrados de la Fuerza Aérea Colombiana (FAC). My work focuses on bridging the gap between clinical aerospace medicine and cutting-edge technology, specifically in physiological monitoring and AI-driven performance assessment.</p>
-            <p>With training from both <strong>NASA</strong> and <strong>ESA</strong>, I have participated in analog space missions (THOR simulation) and continue to develop tools for pilots and crews operating in extreme environments, including research initiatives in Antarctica.</p>
+            <h2>Current Role & Mission</h2>
+            <p>
+                I am an <strong>Associate Professor of Aerospace Medicine</strong> and specialized researcher at the <strong>Direction of Aerospace Medicine</strong>. My work bridges the gap between clinical medicine, aviation physiology, and emerging technologies to optimize human performance in high-stakes environments.
+            </p>
+            <p>As a leading instructor in aerospace physiology, I manage advanced training systems including:</p>
+            <ul>
+                <li><strong>Hypobaric Chambers</strong> and Normobaric Hypoxia operations.</li>
+                <li><strong>Gyro Integrated Physiology Trainer II (GIPT-II)</strong> for Spatial Disorientation training.</li>
+                <li><strong>Night Vision Devices (NVD)</strong> and physiological integration.</li>
+            </ul>
         </section>
 
-        <section id="expertise">
-            <h2>Core Expertise</h2>
+        <section id="aviation-industry">
+            <h2>Aviation Industry Expertise</h2>
             <div class="grid">
                 <div class="card">
-                    <h3>Physiological Computing</h3>
-                    <p>Real-time telemetry and analysis of HRV, workload biomarkers, and hypoxia responses (hypobaric/normobaric).</p>
-                    <div><span class="tag">Python</span><span class="tag">Signal Processing</span></div>
+                    <h3>Civil Aviation Authority</h3>
+                    <p>Official <strong>Aviation Medical Examiner (AME)</strong> for the Civil Aviation Authority in Colombia (Aerocivil), responsible for certifying the medical fitness of pilots and aircrews.</p>
+                    <span class="tag">Certification</span><span class="tag">Aviation Safety</span>
                 </div>
                 <div class="card">
-                    <h3>Aviation Physiology</h3>
-                    <p>Expertise in G-LOC prevention, spatial disorientation, and night vision systems for military and civil aviation.</p>
-                    <div><span class="tag">FAC Instructor</span><span class="tag">Aerospace MD</span></div>
+                    <h3>Physiological Monitoring</h3>
+                    <p>Developer of AI-driven systems for real-time monitoring of HRV, metabolic markers, and workload biomarkers in high-performance aviation environments.</p>
+                    <span class="tag">Python</span><span class="tag">AI Systems</span><span class="tag">AsterPhysiology</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="expeditions">
+            <h2>Expeditions & Research Missions</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>IX Antarctic Expedition (2022-2023)</h3>
+                    <p>Served as Medical Officer and Researcher for the Colombian Antarctic Program. Conducted studies on physiological responses and risk management in extreme polar environments.</p>
                 </div>
                 <div class="card">
-                    <h3>Human Factors</h3>
-                    <p>Cognitive load assessment through adaptive automation and analog space mission simulations.</p>
-                    <div><span class="tag">Analog Astronaut</span><span class="tag">Psychophysics</span></div>
+                    <h3>THOR Space Analog Mission</h3>
+                    <p>Participated as a Medical Officer in space analog simulations, focusing on human performance, isolation, and confinement stressors.</p>
                 </div>
             </div>
         </section>
 
         <section id="publications">
-            <h2>Selected Publications</h2>
-            <div class="pub-item">
-                <div class="pub-title">Metabolic Syndrome, Hyperlipidemias, and Associated Clinical Markers Among Military Airmen</div>
-                <div class="pub-meta">Aerospace Medicine and Human Performance (2023) | Cited by 3</div>
+            <h2>Selected Research & Publications</h2>
+            <div class="card" style="margin-bottom: 1rem;">
+                <p><strong>Metabolic Syndrome and Clinical Markers Among Military Airmen</strong> (2023)<br>
+                <em>Aerospace Medicine and Human Performance</em></p>
             </div>
-            <div class="pub-item">
-                <div class="pub-title">Investigating Psychological and Physiological Responses to Isolation: The THOR Space Analog Simulation</div>
-                <div class="pub-meta">Journal of Applied Cognitive Neuroscience (2023)</div>
+            <div class="card" style="margin-bottom: 1rem;">
+                <p><strong>Airplane Headaches: Time to Classify Them</strong> (2008)<br>
+                <em>Headache: The Journal of Head and Face Pain</em></p>
             </div>
-            <div class="pub-item">
-                <div class="pub-title">Airplane Headaches: Time to Classify Them</div>
-                <div class="pub-meta">Headache: The Journal of Head and Face Pain (2008) | Cited by 16</div>
+            <div class="card" style="margin-bottom: 1rem;">
+                <p><strong>Psychological and Physiological Responses to Isolation (THOR Mission)</strong> (2023)<br>
+                <em>Journal of Applied Cognitive Neuroscience</em></p>
             </div>
-            <p><a href="https://scholar.google.com/citations?user=uIJjC_gAAAAJ">View more on Google Scholar &rarr;</a></p>
-        </section>
-
-        <section id="projects">
-            <h2>Technical Projects</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>OpenMATB</h3>
-                    <p>Open-source Multi-Attribute Task Battery for cognitive workload research in aviation.</p>
-                    <a href="https://github.com/strikerdlm/OpenMATB">GitHub Repo &rarr;</a>
-                </div>
-                <div class="card">
-                    <h3>Hexoskin Wav Analyzer</h3>
-                    <p>Advanced physiological waveform analysis tool for Astroskin and Hexoskin wearables.</p>
-                    <a href="https://github.com/strikerdlm/hexoskin-wav-analyzer">GitHub Repo &rarr;</a>
-                </div>
-            </div>
+            <p style="text-align: center; margin-top: 1.5rem;">
+                <a href="https://scholar.google.com/citations?user=uIJjC_gAAAAJ" target="_blank">View Full Portfolio on Google Scholar &rarr;</a>
+            </p>
         </section>
 
         <footer>
-            <p>&copy; 2026 Diego L. Malpica | <a href="https://github.com/strikerdlm">GitHub</a> | <a href="https://www.linkedin.com/in/diegolmalpica/">LinkedIn</a> | <a href="https://orcid.org/0000-0002-2257-4940">ORCID</a></p>
+            <p>&copy; 2025 Diego L. Malpica | 
+                <a href="https://github.com/strikerdlm">GitHub</a> | 
+                <a href="https://www.linkedin.com/in/diegolmalpica/">LinkedIn</a> | 
+                <a href="https://orcid.org/0000-0002-2257-4940">ORCID</a>
+            </p>
         </footer>
     </div>
 </body>
