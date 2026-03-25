@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diego L. Malpica | Aerospace Medicine & AI</title>
+    <title>Diego L. Malpica | Aerospace Medicine & AI Systems</title>
     <style>
         :root {
             --primary: #00ffff;
             --bg: #0d1117;
             --text: #c9d1d9;
             --accent: #58a6ff;
+            --card-bg: #161b22;
+            --border: #30363d;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
@@ -20,52 +22,89 @@
             padding: 0;
         }
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 2rem;
         }
         header {
             text-align: center;
             padding: 4rem 0;
-            border-bottom: 1px solid #30363d;
+            border-bottom: 1px solid var(--border);
         }
-        h1 {
+        .profile-title {
             color: var(--primary);
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
         }
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--accent);
+            font-weight: 300;
         }
         section {
-            padding: 2rem 0;
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border);
         }
         h2 {
-            border-left: 4px solid var(--primary);
-            padding-left: 1rem;
             color: #f0f6fc;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background: var(--primary);
+            margin-right: 1rem;
         }
         .grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
         .card {
-            background: #161b22;
+            background: var(--card-bg);
             padding: 1.5rem;
             border-radius: 8px;
-            border: 1px solid #30363d;
+            border: 1px solid var(--border);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
         }
         .card h3 {
             margin-top: 0;
             color: var(--accent);
         }
+        .pub-item {
+            margin-bottom: 1.5rem;
+        }
+        .pub-title {
+            font-weight: bold;
+            color: #f0f6fc;
+        }
+        .pub-meta {
+            font-size: 0.9rem;
+            color: #8b949e;
+        }
+        .tag {
+            display: inline-block;
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--accent);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
         footer {
             text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
-            border-top: 1px solid #30363d;
+            padding: 3rem;
+            color: #8b949e;
         }
         a {
             color: var(--accent);
@@ -74,45 +113,95 @@
         a:hover {
             text-decoration: underline;
         }
+        .training-badge {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+        .badge {
+            border: 1px solid var(--accent);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Diego L. Malpica</h1>
-            <p class="subtitle">Aerospace Medicine Researcher | Human Performance | AI Developer</p>
+            <h1 class="profile-title">Diego L. Malpica</h1>
+            <p class="subtitle">Aerospace Medicine Researcher | AI & Human Performance Systems</p>
+            <div class="training-badge">
+                <span class="badge">NASA Johnson Space Center Trained</span>
+                <span class="badge">European Astronaut Centre (ESA) Trained</span>
+                <span class="badge">Colombian Air Force (FAC) Docente</span>
+            </div>
         </header>
 
         <section id="about">
-            <h2>Mission Objective</h2>
-            <p>Investigating human performance at the edge of physiological limits. Combining rigorous scientific methodology with emerging technologies to build next-gen pilot performance assessment systems.</p>
+            <h2>About Me</h2>
+            <p>I am a specialist in Aerospace Medicine from the Universidad Nacional de Colombia, currently serving as a researcher and professor at the Escuela de Posgrados de la Fuerza Aérea Colombiana (FAC). My work focuses on bridging the gap between clinical aerospace medicine and cutting-edge technology, specifically in physiological monitoring and AI-driven performance assessment.</p>
+            <p>With training from both <strong>NASA</strong> and <strong>ESA</strong>, I have participated in analog space missions (THOR simulation) and continue to develop tools for pilots and crews operating in extreme environments, including research initiatives in Antarctica.</p>
         </section>
 
-        <section id="research">
-            <h2>Research Domains</h2>
+        <section id="expertise">
+            <h2>Core Expertise</h2>
             <div class="grid">
                 <div class="card">
-                    <h3>Physiological Monitoring</h3>
-                    <p>Acceleration physiology (G-LOC prevention), Altitude medicine (hypoxia), and Cardiovascular monitoring (HRV analysis).</p>
+                    <h3>Physiological Computing</h3>
+                    <p>Real-time telemetry and analysis of HRV, workload biomarkers, and hypoxia responses (hypobaric/normobaric).</p>
+                    <div><span class="tag">Python</span><span class="tag">Signal Processing</span></div>
                 </div>
                 <div class="card">
-                    <h3>Human-Machine Interface</h3>
-                    <p>Adaptive automation and cognitive load assessment in extreme environments.</p>
+                    <h3>Aviation Physiology</h3>
+                    <p>Expertise in G-LOC prevention, spatial disorientation, and night vision systems for military and civil aviation.</p>
+                    <div><span class="tag">FAC Instructor</span><span class="tag">Aerospace MD</span></div>
+                </div>
+                <div class="card">
+                    <h3>Human Factors</h3>
+                    <p>Cognitive load assessment through adaptive automation and analog space mission simulations.</p>
+                    <div><span class="tag">Analog Astronaut</span><span class="tag">Psychophysics</span></div>
                 </div>
             </div>
         </section>
 
+        <section id="publications">
+            <h2>Selected Publications</h2>
+            <div class="pub-item">
+                <div class="pub-title">Metabolic Syndrome, Hyperlipidemias, and Associated Clinical Markers Among Military Airmen</div>
+                <div class="pub-meta">Aerospace Medicine and Human Performance (2023) | Cited by 3</div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-title">Investigating Psychological and Physiological Responses to Isolation: The THOR Space Analog Simulation</div>
+                <div class="pub-meta">Journal of Applied Cognitive Neuroscience (2023)</div>
+            </div>
+            <div class="pub-item">
+                <div class="pub-title">Airplane Headaches: Time to Classify Them</div>
+                <div class="pub-meta">Headache: The Journal of Head and Face Pain (2008) | Cited by 16</div>
+            </div>
+            <p><a href="https://scholar.google.com/citations?user=uIJjC_gAAAAJ">View more on Google Scholar &rarr;</a></p>
+        </section>
+
         <section id="projects">
-            <h2>Key Projects</h2>
-            <ul>
-                <li><strong>OpenMATB:</strong> Multi-Attribute Task Battery for cognitive workload assessment.</li>
-                <li><strong>hexoskin-wav-analyzer:</strong> Physiological waveform analysis for Hexoskin/Astroskin.</li>
-                <li><strong>HumanPerformanceCalcs:</strong> Physiological outcome prediction models.</li>
-            </ul>
+            <h2>Technical Projects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>OpenMATB</h3>
+                    <p>Open-source Multi-Attribute Task Battery for cognitive workload research in aviation.</p>
+                    <a href="https://github.com/strikerdlm/OpenMATB">GitHub Repo &rarr;</a>
+                </div>
+                <div class="card">
+                    <h3>Hexoskin Wav Analyzer</h3>
+                    <p>Advanced physiological waveform analysis tool for Astroskin and Hexoskin wearables.</p>
+                    <a href="https://github.com/strikerdlm/hexoskin-wav-analyzer">GitHub Repo &rarr;</a>
+                </div>
+            </div>
         </section>
 
         <footer>
-            <p>&copy; 2026 Diego L. Malpica. Connect on <a href="https://github.com/strikerdlm">GitHub</a> | <a href="https://www.linkedin.com/in/diegolmalpica/">LinkedIn</a></p>
+            <p>&copy; 2026 Diego L. Malpica | <a href="https://github.com/strikerdlm">GitHub</a> | <a href="https://www.linkedin.com/in/diegolmalpica/">LinkedIn</a> | <a href="https://orcid.org/0000-0002-2257-4940">ORCID</a></p>
         </footer>
     </div>
 </body>
