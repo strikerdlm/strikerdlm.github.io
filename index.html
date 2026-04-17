@@ -1,190 +1,509 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diego L. Malpica | Aerospace Medicine & AI Systems</title>
-    <style>
-        :root {
-            --primary: #00ffff;
-            --bg: #0d1117;
-            --text: #c9d1d9;
-            --accent: #58a6ff;
-            --card-bg: #161b22;
-            --border: #30363d;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        header {
-            text-align: center;
-            padding: 4rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-        h1 {
-            color: var(--primary);
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--accent);
-            font-weight: 300;
-        }
-        section {
-            padding: 3rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-        h2 {
-            color: var(--primary);
-            border-left: 4px solid var(--accent);
-            padding-left: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 1.5rem;
-            border-radius: 8px;
-            transition: transform 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-        }
-        .tag {
-            display: inline-block;
-            background: rgba(88, 166, 255, 0.1);
-            color: var(--accent);
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            margin-right: 0.5rem;
-            margin-top: 0.5rem;
-        }
-        a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        footer {
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
-            color: #8b949e;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            margin-bottom: 0.8rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-        li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diego L. Malpica — Aerospace Medicine × AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#05070d;
+    --bg-1:#0a0f1c;
+    --surface:rgba(18,24,40,.55);
+    --surface-strong:rgba(22,29,48,.85);
+    --border:rgba(120,160,255,.12);
+    --border-strong:rgba(120,180,255,.35);
+    --text:#dfe6f3;
+    --muted:#8a94ac;
+    --primary:#7afcff;     /* cyan */
+    --accent:#9d7bff;      /* violet */
+    --accent-2:#ff7ad9;    /* magenta */
+    --gold:#ffd47a;
+    --grad: linear-gradient(120deg,#7afcff 0%,#9d7bff 50%,#ff7ad9 100%);
+    --shadow: 0 10px 40px rgba(0,0,0,.45);
+    --radius: 16px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:var(--bg-0);
+    color:var(--text);
+    line-height:1.65;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Animated aurora background ---------- */
+  .bg-aurora{
+    position:fixed;inset:0;z-index:-2;
+    background:
+      radial-gradient(60vw 60vw at 10% 10%, rgba(122,252,255,.14), transparent 60%),
+      radial-gradient(50vw 50vw at 90% 20%, rgba(157,123,255,.18), transparent 60%),
+      radial-gradient(60vw 60vw at 50% 100%, rgba(255,122,217,.12), transparent 60%),
+      var(--bg-1);
+    filter:blur(0px);
+    animation:drift 22s ease-in-out infinite alternate;
+  }
+  .bg-grid{
+    position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size:48px 48px;
+    mask-image:radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+  @keyframes drift{
+    0%{transform:translate3d(0,0,0) scale(1)}
+    100%{transform:translate3d(-2%,2%,0) scale(1.05)}
+  }
+
+  /* ---------- Layout ---------- */
+  .container{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
+  nav.top{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.25rem 0;font-size:.9rem;
+  }
+  nav.top .brand{
+    font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.5px;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  nav.top a{color:var(--muted);text-decoration:none;margin-left:1.25rem;transition:color .2s}
+  nav.top a:hover{color:var(--primary)}
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    padding:5rem 0 4rem;text-align:left;position:relative;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:.5rem;
+    font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--primary);
+    padding:.4rem .8rem;border:1px solid var(--border-strong);
+    border-radius:999px;background:rgba(122,252,255,.05);
+    margin-bottom:1.5rem;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 12px var(--primary);animation:pulse 1.8s ease-in-out infinite}
+  @keyframes pulse{50%{opacity:.4}}
+
+  h1.hero-title{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(2.4rem,6vw,4.4rem);
+    line-height:1.05;font-weight:700;margin:0 0 1rem;
+    letter-spacing:-.02em;
+  }
+  h1.hero-title .grad{
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero-sub{
+    font-size:1.15rem;color:var(--muted);max-width:680px;margin:0 0 2rem;
+  }
+  .chip-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+  .chip{
+    font-family:'JetBrains Mono',monospace;font-size:.75rem;
+    padding:.35rem .75rem;border-radius:999px;
+    border:1px solid var(--border);background:var(--surface);
+    color:var(--text);backdrop-filter:blur(8px);
+  }
+
+  /* ---------- Section primitives ---------- */
+  section{padding:4rem 0;position:relative}
+  .section-head{
+    display:flex;align-items:baseline;gap:1rem;margin-bottom:2.5rem;
+  }
+  .section-num{
+    font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:.85rem;
+  }
+  h2{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:clamp(1.6rem,3vw,2.2rem);
+    margin:0;font-weight:700;letter-spacing:-.01em;
+  }
+  h2 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .section-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border-strong),transparent)}
+
+  p.lead{color:var(--text);font-size:1.05rem;max-width:780px}
+  p.muted{color:var(--muted)}
+
+  /* ---------- Cards ---------- */
+  .grid{display:grid;gap:1.25rem}
+  .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+
+  .card{
+    position:relative;padding:1.5rem 1.5rem 1.4rem;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    transition:transform .35s cubic-bezier(.2,.8,.2,1), border-color .3s, background .3s;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;
+    background:var(--grad);
+    -webkit-mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+    opacity:0;transition:opacity .3s;
+    pointer-events:none;
+  }
+  .card:hover{transform:translateY(-4px);border-color:transparent;background:var(--surface-strong)}
+  .card:hover::before{opacity:1}
+
+  .card .kicker{
+    font-family:'JetBrains Mono',monospace;font-size:.7rem;
+    color:var(--accent);letter-spacing:.18em;text-transform:uppercase;
+    margin-bottom:.6rem;
+  }
+  .card h3{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:1.15rem;margin:0 0 .6rem;color:#fff;font-weight:600;letter-spacing:-.005em;
+  }
+  .card p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.6}
+  .card .tags{margin-top:1rem;display:flex;flex-wrap:wrap;gap:.4rem}
+  .tag{
+    font-family:'JetBrains Mono',monospace;font-size:.7rem;
+    padding:.2rem .55rem;border-radius:6px;
+    background:rgba(122,252,255,.07);color:var(--primary);
+    border:1px solid rgba(122,252,255,.15);
+  }
+  .tag.alt{background:rgba(157,123,255,.07);color:var(--accent);border-color:rgba(157,123,255,.2)}
+  .tag.warm{background:rgba(255,122,217,.07);color:var(--accent-2);border-color:rgba(255,122,217,.2)}
+
+  /* ---------- About list ---------- */
+  ul.feature-list{list-style:none;padding:0;margin:1.5rem 0 0;display:grid;gap:.75rem}
+  ul.feature-list li{
+    padding:.85rem 1rem .85rem 2.5rem;position:relative;
+    background:var(--surface);border:1px solid var(--border);border-radius:12px;
+    transition:border-color .3s;
+  }
+  ul.feature-list li::before{
+    content:"◇";position:absolute;left:1rem;top:.85rem;color:var(--primary);font-size:.95rem;
+  }
+  ul.feature-list li:hover{border-color:var(--border-strong)}
+
+  /* ---------- Pubs ---------- */
+  .pub{
+    padding:1.25rem 1.4rem;border-left:2px solid var(--accent);
+    background:rgba(255,255,255,.02);border-radius:0 12px 12px 0;margin-bottom:1rem;
+  }
+  .pub strong{color:#fff}
+  .pub em{color:var(--muted)}
+
+  /* ---------- CTA ---------- */
+  .cta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+  .btn{
+    display:inline-flex;align-items:center;gap:.5rem;
+    padding:.75rem 1.25rem;border-radius:999px;font-weight:500;
+    text-decoration:none;font-size:.95rem;transition:transform .2s, box-shadow .3s;
+    border:1px solid var(--border-strong);color:var(--text);background:var(--surface);
+    backdrop-filter:blur(8px);
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(122,252,255,.15)}
+  .btn.primary{
+    background:var(--grad);color:#0b0f1d;border:none;font-weight:700;
+  }
+  .btn.primary:hover{box-shadow:0 12px 35px rgba(157,123,255,.45)}
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:3rem 0 4rem;text-align:center;color:var(--muted);font-size:.9rem;
+    border-top:1px solid var(--border);margin-top:2rem;
+  }
+  footer a{color:var(--primary);text-decoration:none;margin:0 .5rem}
+  footer a:hover{text-decoration:underline}
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:600px){
+    header.hero{padding:3rem 0 2rem}
+    .container{padding:1.25rem 1rem}
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Diego Leonel Malpica Hincapié</h1>
-            <p class="subtitle">Aerospace Medicine Specialist | Researcher | AI Developer</p>
-            <div style="margin-top: 1rem;">
-                <span class="tag">MD</span>
-                <span class="tag">Aviation Physiology</span>
-                <span class="tag">Human Factors</span>
-                <span class="tag">Data Science</span>
-            </div>
-        </header>
 
-        <section id="about">
-            <h2>Current Role & Mission</h2>
-            <p>
-                I am an <strong>Associate Professor of Aerospace Medicine</strong> and specialized researcher at the <strong>Direction of Aerospace Medicine</strong>. My work bridges the gap between clinical medicine, aviation physiology, and emerging technologies to optimize human performance in high-stakes environments.
-            </p>
-            <p>As a leading instructor in aerospace physiology, I manage advanced training systems including:</p>
-            <ul>
-                <li><strong>Hypobaric Chambers</strong> and Normobaric Hypoxia operations.</li>
-                <li><strong>Gyro Integrated Physiology Trainer II (GIPT-II)</strong> for Spatial Disorientation training.</li>
-                <li><strong>Night Vision Devices (NVD)</strong> and physiological integration.</li>
-            </ul>
-        </section>
+<div class="bg-aurora"></div>
+<div class="bg-grid"></div>
 
-        <section id="aviation-industry">
-            <h2>Aviation Industry Expertise</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Civil Aviation Authority</h3>
-                    <p>Official <strong>Aviation Medical Examiner (AME)</strong> for the Civil Aviation Authority in Colombia (Aerocivil), responsible for certifying the medical fitness of pilots and aircrews.</p>
-                    <span class="tag">Certification</span><span class="tag">Aviation Safety</span>
-                </div>
-                <div class="card">
-                    <h3>Physiological Monitoring</h3>
-                    <p>Developer of AI-driven systems for real-time monitoring of HRV, metabolic markers, and workload biomarkers in high-performance aviation environments.</p>
-                    <span class="tag">Python</span><span class="tag">AI Systems</span><span class="tag">AsterPhysiology</span>
-                </div>
-            </div>
-        </section>
+<div class="container">
 
-        <section id="expeditions">
-            <h2>Expeditions & Research Missions</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>IX Antarctic Expedition (2022-2023)</h3>
-                    <p>Served as Medical Officer and Researcher for the Colombian Antarctic Program. Conducted studies on physiological responses and risk management in extreme polar environments.</p>
-                </div>
-                <div class="card">
-                    <h3>THOR Space Analog Mission</h3>
-                    <p>Participated as a Medical Officer in space analog simulations, focusing on human performance, isolation, and confinement stressors.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="publications">
-            <h2>Selected Research & Publications</h2>
-            <div class="card" style="margin-bottom: 1rem;">
-                <p><strong>Metabolic Syndrome and Clinical Markers Among Military Airmen</strong> (2023)<br>
-                <em>Aerospace Medicine and Human Performance</em></p>
-            </div>
-            <div class="card" style="margin-bottom: 1rem;">
-                <p><strong>Psychological and Physiological Responses to Isolation (THOR Mission)</strong> (2023)<br>
-                <em>Journal of Applied Cognitive Neuroscience</em></p>
-            </div>
-            <p style="text-align: center; margin-top: 1.5rem;">
-                <a href="https://scholar.google.com/citations?user=uIJjC_gAAAAJ" target="_blank">View Full Portfolio on Google Scholar &rarr;</a>
-            </p>
-        </section>
-
-        <footer>
-            <p>&copy; 2026 Diego L. Malpica | 
-                <a href="https://github.com/strikerdlm">GitHub</a> | 
-                <a href="https://www.linkedin.com/in/diegolmalpica/">LinkedIn</a> | 
-                <a href="https://orcid.org/0000-0002-2257-4940">ORCID</a>
-            </p>
-        </footer>
+  <nav class="top">
+    <span class="brand">DLM // Aerospace × AI</span>
+    <div>
+      <a href="#focus">Focus</a>
+      <a href="#projects">Projects</a>
+      <a href="#missions">Missions</a>
+      <a href="#research">Research</a>
     </div>
+  </nav>
+
+  <header class="hero reveal">
+    <span class="eyebrow"><span class="dot"></span>Bogotá · Aerospace Medicine Lab</span>
+    <h1 class="hero-title">
+      Diego L. <span class="grad">Malpica H.</span><br>
+      <span style="font-size:.55em;color:var(--muted);font-weight:500;">Engineering human performance for the edge of flight.</span>
+    </h1>
+    <p class="hero-sub">
+      Aerospace Medicine specialist, researcher, and AI developer working at the intersection of
+      aviation physiology, extreme‑environment medicine, and applied machine intelligence —
+      building systems that help humans operate safely where the atmosphere stops cooperating.
+    </p>
+    <div class="chip-row">
+      <span class="chip">MD · Aerospace Medicine</span>
+      <span class="chip">Aviation Physiology</span>
+      <span class="chip">Human Factors</span>
+      <span class="chip">Applied AI / LLMs</span>
+      <span class="chip">Extreme Environments</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn primary" href="https://scholar.google.com/citations?user=uIJjC_gAAAAJ" target="_blank">Research Portfolio →</a>
+      <a class="btn" href="https://github.com/strikerdlm" target="_blank">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/diegolmalpica/" target="_blank">LinkedIn</a>
+    </div>
+  </header>
+
+  <section id="focus" class="reveal">
+    <div class="section-head">
+      <span class="section-num">01 //</span>
+      <h2>Current <span class="grad">Focus</span></h2>
+      <span class="section-line"></span>
+    </div>
+    <p class="lead">
+      Associate Professor of Aerospace Medicine and lead researcher at the Direction of Aerospace Medicine.
+      My day‑to‑day blends clinical aviation medicine, advanced human‑factors training, and the design of
+      computational tools that turn physiology into actionable signal.
+    </p>
+    <ul class="feature-list">
+      <li><strong>Hypobaric chamber & normobaric hypoxia</strong> — operational training and physiological research.</li>
+      <li><strong>Spatial disorientation & gyroscopic trainers</strong> — sensory illusion mitigation for aircrews.</li>
+      <li><strong>Night vision device integration</strong> — visual physiology under low‑light flight conditions.</li>
+      <li><strong>Aviation Medical Examiner (AME)</strong> — civil aviation authority certification of pilots and crews.</li>
+    </ul>
+  </section>
+
+  <section id="projects" class="reveal">
+    <div class="section-head">
+      <span class="section-num">02 //</span>
+      <h2>Selected <span class="grad">Projects</span></h2>
+      <span class="section-line"></span>
+    </div>
+    <p class="muted" style="max-width:760px;">
+      A working portfolio across human performance modeling, aerospace medicine tooling, and applied AI.
+      Several projects are private — descriptions intentionally stay high‑level.
+    </p>
+
+    <div class="grid cols-2" style="margin-top:2rem;">
+
+      <div class="card">
+        <div class="kicker">Human Performance · Modeling</div>
+        <h3>Aircrew Fatigue Prediction Engine</h3>
+        <p>Implementation of a sleep–wake bio‑mathematical model that forecasts effectiveness, alertness, and
+        cognitive risk for variable duty schedules — designed to support flight operations and crew planning.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag alt">Bio‑math</span><span class="tag warm">Ops</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">AI · Aerospace Medicine</div>
+        <h3>Aeromedical Multi‑Agent System</h3>
+        <p>A multi‑agent LLM workflow for aeromedical certification and research support — orchestrates
+        retrieval, reasoning and verification across regulatory, clinical and scientific knowledge sources.</p>
+        <div class="tags"><span class="tag">LLM Agents</span><span class="tag alt">RAG</span><span class="tag warm">Medical AI</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Research · Systematic Review</div>
+        <h3>LLMs in Aerospace Medicine — Systematic Review</h3>
+        <p>An end‑to‑end pipeline for screening, extracting and synthesizing the literature on large language
+        models applied to aerospace and clinical aviation contexts.</p>
+        <div class="tags"><span class="tag">NLP</span><span class="tag alt">Evidence Synthesis</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Physiological Monitoring</div>
+        <h3>Wearable Physiology Analyzer</h3>
+        <p>Toolkit for processing wearable bio‑signal recordings (ECG, HRV, respiration, accelerometry)
+        from astronaut‑grade and athletic devices — built around reproducible HRV metrics and time‑series QC.</p>
+        <div class="tags"><span class="tag">HRV</span><span class="tag alt">Signal Processing</span><span class="tag warm">Wearables</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Hypobaric Operations</div>
+        <h3>Altitude Chamber Operations Suite</h3>
+        <p>Application for managing hypobaric‑chamber profiles, capturing physiological data and supporting
+        instructor decisions during hypoxia awareness training.</p>
+        <div class="tags"><span class="tag">Operational Tool</span><span class="tag alt">Data Capture</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Hypoxia · Hardware Integration</div>
+        <h3>Reduced‑Oxygen Breathing Device Interface</h3>
+        <p>Serial‑port acquisition layer and GUI for capturing customized data from a normobaric hypoxia
+        training device, enabling research‑grade logging beyond the stock interface.</p>
+        <div class="tags"><span class="tag">Hardware I/O</span><span class="tag alt">GUI</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Decompression Physiology</div>
+        <h3>Decompression Sickness Risk Models</h3>
+        <p>Iterative DCS modeling — both classical physiological formulations and machine‑learning variants —
+        to better characterize altitude‑exposure risk in operational profiles.</p>
+        <div class="tags"><span class="tag">ML</span><span class="tag alt">Physiology</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Otologic Physiology</div>
+        <h3>Middle‑Ear Barotrauma Model</h3>
+        <p>Computational model of pressure‑driven middle‑ear injury, grounded in chamber experience and the
+        published literature, intended for instructor briefings and risk discussion.</p>
+        <div class="tags"><span class="tag">Modeling</span><span class="tag alt">ENT</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Cognitive Performance · Fighter Aviation</div>
+        <h3>Fighter Pilot Neurocognitive Profiling</h3>
+        <p>Systematic review and meta‑analytic work on the neuropsychological profile of high‑performance
+        fighter aircrews, with emphasis on attention, executive function and workload tolerance.</p>
+        <div class="tags"><span class="tag">Meta‑analysis</span><span class="tag alt">Neurocognition</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Automation · Cognitive Load</div>
+        <h3>Automation & Attention in Commercial Cockpits</h3>
+        <p>Research project examining attention and neurocognitive domains in commercial pilots operating
+        highly automated flight decks — manuscript and analysis pipeline in progress.</p>
+        <div class="tags"><span class="tag">Human Factors</span><span class="tag alt">Automation</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Workload · Experimental Platform</div>
+        <h3>Multi‑Attribute Task Battery — Military Adaptation</h3>
+        <p>Customized derivative of an open multi‑attribute task battery, tailored toward military aviation
+        workload research, with extensions for experiment replicability and data export.</p>
+        <div class="tags"><span class="tag">Experimental Psych</span><span class="tag alt">Workload</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Cardiometabolic · Aviation</div>
+        <h3>Metabolic Syndrome in Pilots — Evidence Hub</h3>
+        <p>Living review and analysis pipeline on metabolic syndrome and cardiometabolic risk among aircrews,
+        connecting clinical markers to operational fitness implications.</p>
+        <div class="tags"><span class="tag">Epidemiology</span><span class="tag alt">Aviation Medicine</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Acceleration Physiology</div>
+        <h3>+Gz Symptom & Recovery Model</h3>
+        <p>Resource‑flow simulation of symptom induction and recovery from sustained Gz acceleration in
+        aeronauts — supports training narratives and tolerance discussions.</p>
+        <div class="tags"><span class="tag">Simulation</span><span class="tag alt">G‑forces</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Chronobiology</div>
+        <h3>Circadian Simulation Toolkit</h3>
+        <p>Working library for simulating and analyzing human circadian rhythms under arbitrary light schedules
+        — useful for shift, mission and long‑haul operational planning.</p>
+        <div class="tags"><span class="tag">Chronobiology</span><span class="tag alt">Light</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">AI Research Infrastructure</div>
+        <h3>Deep Research MCP Server</h3>
+        <p>Model‑Context‑Protocol server for AI‑assisted deep research — built around citation discipline,
+        scientific rigor and tight integration with reasoning models.</p>
+        <div class="tags"><span class="tag">MCP</span><span class="tag alt">LLM Tooling</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Knowledge Engineering</div>
+        <h3>Personal Vector Knowledge Store</h3>
+        <p>Vector‑store and retrieval system that backs my aerospace‑medicine literature workflow, including
+        a private MCP layer over a personal reference library.</p>
+        <div class="tags"><span class="tag">RAG</span><span class="tag alt">Embeddings</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Clinical Calculators</div>
+        <h3>Human Performance Calculation Suite</h3>
+        <p>Collection of small Python utilities that estimate physiological outcomes used routinely in
+        aerospace medicine training and consultation.</p>
+        <div class="tags"><span class="tag">Toolkit</span></div>
+      </div>
+
+      <div class="card">
+        <div class="kicker">Pulse Oximetry</div>
+        <h3>Bluetooth Pulse Oximetry Bridge</h3>
+        <p>Custom interface to acquire SpO₂ and pulse signals directly from Bluetooth pulse oximeters,
+        rebuilt after the original mobile pipeline became unavailable.</p>
+        <div class="tags"><span class="tag">BLE</span><span class="tag alt">SpO₂</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="missions" class="reveal">
+    <div class="section-head">
+      <span class="section-num">03 //</span>
+      <h2>Field <span class="grad">Missions</span></h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="grid cols-2">
+      <div class="card">
+        <div class="kicker">Polar · 2022–2023</div>
+        <h3>IX Antarctic Expedition</h3>
+        <p>Medical Officer and researcher with the Colombian Antarctic Program. Studied physiological
+        responses, cold‑exposure adaptation and risk management in extreme polar environments.</p>
+      </div>
+      <div class="card">
+        <div class="kicker">Space Analog</div>
+        <h3>THOR Analog Mission</h3>
+        <p>Medical Officer in a confined‑habitat space analog campaign, focused on isolation, confinement and
+        cognitive‑physiological responses relevant to long‑duration spaceflight.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="research" class="reveal">
+    <div class="section-head">
+      <span class="section-num">04 //</span>
+      <h2>Selected <span class="grad">Research</span></h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="pub">
+      <strong>Metabolic Syndrome and Clinical Markers Among Military Airmen</strong> (2023)<br>
+      <em>Aerospace Medicine and Human Performance</em>
+    </div>
+    <div class="pub">
+      <strong>Psychological and Physiological Responses to Isolation — THOR Mission</strong> (2023)<br>
+      <em>Journal of Applied Cognitive Neuroscience</em>
+    </div>
+    <p style="text-align:center;margin-top:2rem;">
+      <a class="btn primary" href="https://scholar.google.com/citations?user=uIJjC_gAAAAJ" target="_blank">Full Portfolio on Google Scholar →</a>
+    </p>
+  </section>
+
+  <footer>
+    © 2026 Diego L. Malpica ·
+    <a href="https://github.com/strikerdlm" target="_blank">GitHub</a> ·
+    <a href="https://www.linkedin.com/in/diegolmalpica/" target="_blank">LinkedIn</a> ·
+    <a href="https://orcid.org/0000-0002-2257-4940" target="_blank">ORCID</a>
+  </footer>
+
+</div>
+
+<script>
+  // Reveal-on-scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
 </body>
 </html>
